@@ -1,6 +1,6 @@
-package repository;
+package org.example.todo_app.repository;
 
-import model.Todo;
+import org.example.todo_app.model.Todo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
