@@ -3,6 +3,8 @@ package org.example.todo_app.controller;
 import lombok.AllArgsConstructor;
 import org.example.todo_app.dto.TodoDTO;
 import org.example.todo_app.model.Todo;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.todo_app.service.TodoService;
 
@@ -26,8 +28,10 @@ public class TodoController {
     }
 
     @PostMapping
-    public Todo createTodo(@RequestBody TodoDTO dto) {
-        return service.createTodo(dto);
+    public ResponseEntity<Todo> createTodo(@RequestBody TodoDTO dto) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.createTodo(dto));
     }
 
     @PutMapping("/{id}")
@@ -36,8 +40,11 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTodo(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTodo(@PathVariable String id) {
         service.delete(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
     }
 
 

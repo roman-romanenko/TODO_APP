@@ -38,7 +38,6 @@ class TodoServiceTest {
         when(mockRepo.findAll()).thenReturn(List.of(todo));
         //WHEN
         List<Todo> todos = todoService.getAllTodos();
-
         //THEN
         assertEquals(List.of(todo), todos);
         verify(mockRepo).findAll();
@@ -51,7 +50,7 @@ class TodoServiceTest {
         TodoDTO dto = new TodoDTO("Test", TodoStatus.OPEN);
         Todo todoFromDTO = new Todo(null, dto.description(), dto.status());
 
-        when(mockRepo.save(todoFromDTO)).thenAnswer(invocation -> invocation.getArgument(0));
+        when(mockRepo.save(todoFromDTO)).thenReturn(todoFromDTO);
         //WHEN
         Todo createdTodo = todoService.createTodo(dto);
         //THEN
@@ -71,7 +70,6 @@ class TodoServiceTest {
         //WHEN
         Optional<Todo> existingTodo = todoService.getTodoById(id);
         //THEN
-
         assertTrue(existingTodo.isPresent());
         verify(mockRepo).findById(id);
     }
@@ -108,10 +106,10 @@ class TodoServiceTest {
 
         when(mockRepo.findById(id)).thenReturn(Optional.empty());
         //WHEN
-            RuntimeException exception = assertThrows(
-                    RuntimeException.class,
-                    () -> todoService.updateTodo(id, dto)
-            );
+        RuntimeException exception = assertThrows(
+                RuntimeException.class,
+                () -> todoService.updateTodo(id, dto)
+        );
         //THEN
         assertEquals("Todo with id: " +  id + " not found.", exception.getMessage());
         verify(mockRepo).findById(id);
