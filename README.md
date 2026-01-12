@@ -38,16 +38,49 @@ git clone https://github.com/roman-romanenko/TODO_APP
 cd TODO_APP
 ```
 
-2 .**Abhängigkeiten installieren & Build**
+2. **Abhängigkeiten installieren & Build**
 ```bash
 mvn clean install
 ```
 
-3.App starten
+3. **App starten**
 ```bash
 mvn spring-boot:run
 ```
 Die API ist erreichbar unter: [http://localhost:8080/api/todo](http://localhost:8080/api/todo)
+
+---
+
+## 🗄️ Datenbank
+
+Dieses Projekt verwendet **MongoDB** als Datenbank.  
+
+### Konfiguration
+```bash
+spring.mongodb.uri=${MONGO_DB_URI}
+```
+
+### Lokale Entwicklung
+Setze die Umgebungsvariable `MONGO_DB_URI`, z. B.:
+```bash
+# macOS / Linux
+export MONGO_DB_URI=mongodb://localhost:27017/todo_app
+
+# Windows CMD
+set MONGO_DB_URI=mongodb://localhost:27017/todo_app
+```
+
+**MongoDB Atlas (Cloud)**
+Alternativ kannst du einen MongoDB Atlas Cluster verwenden. Setze MONGO_DB_URI entsprechend:
+
+```bash
+MONGO_DB_URI=mongodb+srv://<username>:<password>@<cluster-url>/TodoRepository
+```
+Spring Boot liest diese Variable automatisch beim Start der Anwendung, z. B. mit:
+
+```bash
+mvn spring-boot:run
+```
 
 ---
 
