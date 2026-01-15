@@ -18,4 +18,13 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(TodoOrthographicException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorMessage handleTodoOrthographicException(TodoOrthographicException e) {
+        return ErrorMessage.builder()
+                .errorCode(HttpStatus.BAD_REQUEST.value())
+                .errorMessage(e.getMessage())
+                .build();
+    }
+
 }
