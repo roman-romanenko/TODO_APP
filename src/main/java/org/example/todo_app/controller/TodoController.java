@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.example.todo_app.service.TodoService;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +22,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Todo> getTodoById(@PathVariable String id) {
+    public Todo getTodoById(@PathVariable String id) {
         return service.getTodoById(id);
     }
 

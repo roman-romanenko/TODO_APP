@@ -68,9 +68,9 @@ class TodoServiceTest {
 
         when(mockRepo.findById(id)).thenReturn(Optional.of(todo));
         //WHEN
-        Optional<Todo> existingTodo = todoService.getTodoById(id);
+        Todo existingTodo = todoService.getTodoById(id);
         //THEN
-        assertTrue(existingTodo.isPresent());
+        assertEquals(todo,  existingTodo);
         verify(mockRepo).findById(id);
     }
 
