@@ -81,6 +81,20 @@ class TodoControllerTest {
     }
 
     @Test
+    @DisplayName("getTodoById should return ErrorMessage with 404 status if Todo does not exist")
+    void getTodoById_Error() throws Exception {
+        //WHEN & THEN
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/todo/" + "123-123-123"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("""
+                          {
+                             "errorCode": 404,
+                             "errorMessage": "Todo with id: 123-123-123 not found"
+                           }
+                        """));
+    }
+
+    @Test
     @DisplayName("createTodo should create Todo from TodoDto and return with status 201")
     void createTodo() throws Exception {
         //GIVEN
